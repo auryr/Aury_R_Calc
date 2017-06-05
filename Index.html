@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Kamely's Calculator</title>
+	<!--
+	libraries	
+	-->
+	<script src="libraries/jquery-1.12.1.js"></script>
+	<script src="libraries/responsivevoice.js"></script>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="stylesheet" type="text/css" href="CSS/CSSFK.css"> 
+	<style type="text/css">
+		
+		body{		
+			height: 800px;
+			width: 100%;		
+		}
+		
+		#myh1{
+			width: 100%;
+			height:80px;
+			font-size: 60px;
+			text-align: center;
+			color: rgb(0,102,102);
+			text-shadow: 3px 3px 3px  lightyellow;
+
+			
+		}
+
+		.maind{
+			width: 100%;
+			height: 100%;
+		  	background: linear-gradient(132deg,#000066,white)  no-repeat fixed ; 
+		  	background-size: 400% 400%;
+			display: flex;	
+		  	animation: myAnimation 5s ease infinite;  
+		}
+
+	
+		#caldiv{
+			width : 50%;
+			height: 75%;
+			margin: auto;
+			background: silver no-repeat cover;
+			display:flex;
+			border-radius: 12px;
+			flex-direction: column;
+			border:2px double black;
+			position: absolute;
+			top:15%;
+			left: 25%;
+
+		}
+
+	
+		#md{
+			width : 50%;
+			height: 25%;
+			background: transparent;
+			display:flex;
+			border-radius: 12px;
+			flex-direction: row;
+			border:none; ;
+			position: absolute;
+			top:  10px;
+			left: 10px;
+
+		}
+
+		.linediv{
+			flex: 1;
+			border: 3px  ridge silver;
+			background-color: white;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around; 
+			margin: 5px;
+		}
+
+		#scre{
+			font: bold 50px/50px "courrier new", serif;
+			box-sizing: border-box;
+			text-align: right;
+			flex-basis: 100%;
+			height: 100%;
+			border-radius: 12px;
+			margin: auto;
+			overflow: auto;
+			word-wrap: break-word
+		}
+
+		#bds {
+			border-radius: 10px 10px  0px 0px;
+			border: 5px ridge silver;
+			background-color: lightyellow;
+		}
+
+		#bd4 {
+			border-radius: 0px 0px  10px 10px;
+		}
+
+		.buttons{
+			font:italic bold 40px/30px Georgia, serif;
+			box-sizing: border-box;
+			flex:1;
+			border-radius: 12px;
+			border: 1px  solid gray;
+		  	animation: myAnimation_a 20s ease infinite;  
+		 	background-color: linear-gradient(132deg,#009999,#ff3333);
+		 	background-size: contain;
+		 	background-position: center; 
+		 	box-shadow: 2px 2px 1px #888888;
+		 	text-shadow: 3px 3px 2px #888888;
+		}
+		
+
+		.butbk{
+			font:italic bold 15px/20px Georgia, serif;
+			border-radius: 30px;
+			border: 1px  solid gray;
+		 	margin: 10px 0  0 5px;
+		  	animation: myAnimation_a 20s ease infinite;  
+		 	height: 60px;
+		 	width:  60px;
+		}
+	
+
+		.buttons:hover{
+			font:italic bold 35px/30px Georgia, serif;
+			color: blue;
+			border: 3px outset black;
+		 	background-repeat: no-repeat ; 
+		 	background-size: 100% 100%;
+		 	box-shadow: 2px 2px 1px #888888;
+		}
+
+		.butbk:hover{
+			font:italic bold 25px/30px Georgia, serif;
+			color: blue;
+			border: 3px outset black;
+		 	background-repeat: no-repeat ; 
+		 	background-size: 100% 100%
+		}
+
+	     #bn1:hover{
+		 	background-image: url('images/one.jpg') ;
+		 }	
+
+	     #bn2:hover{
+		 	background-image: url('images/two.jpg') ;
+		 }	
+
+	     #bn3:hover{
+		 	background-image: url('images/three.jpg') ;
+		 }	
+
+	     #bn4:hover{
+		 	background-image: url('images/four.jpg') ;
+		 }	
+
+	     #bn5:hover{
+		 	background-image: url('images/five.jpg') ;
+		 }	
+
+	     #bn6:hover{
+		 	background-image: url('images/six.jpg') ;
+		 }	
+
+	     #bn7:hover{
+		 	background-image: url('images/seven.jpg') ;
+		 }	
+
+	     #bn8:hover{
+		 	background-image: url('images/eight.jpg') ;
+		 }	
+
+	     #bn9:hover{
+		 	background-image: url('images/nine.jpg') ;
+		 }	
+
+	     #bn0:hover{
+		 	background-image: url('images/cero.jpg') ;
+		 }	
+
+	     #bnDot:hover{
+		 	background-image: url('images/period.jpg') ;
+		 }	
+
+	     #bnP1:hover{
+		 	background-image: url('images/p1.jpg') ;
+		 }	
+
+	     #bnP2:hover{
+		 	background-image: url('images/p2.jpg') ;
+		 }	
+
+	     #bna:hover{
+		 	background-image: url('images/plus.jpg') ;
+		 }	
+
+	     #bns:hover{
+		 	background-image: url('images/minus.jpg') ;
+		 }	
+
+	     #bnd:hover{
+		 	background-image: url('images/div.jpg') ;
+		 }	
+
+	     #bnm:hover{
+		 	background-image: url('images/mult.jpg') ;
+		 }	
+	
+	</style>
+</head>
+<body>
+
+	<!--Only for thekey frame -->
+	<div class="mainc" >
+		<div class="circle" > </div>	
+		<div class="circle" > </div>	
+		<div class="circle" > </div>	
+		<div class="circle" > </div>	
+		<div class="circle" > </div>	
+		<div class="circle" > </div>	
+		<div class="circle" > </div>	
+		<div class="circle" > </div>	
+	</div>
+	<audio src=""  class=speech>Sound</audio>
+
+	<div id="md">
+		<button class="butbk" id="bk1" onclick="audioSound = (audioSound===false)"> S/N</button>	
+		<button class="butbk" id="bk2" onclick="changeBackGround(1)">BG1</button>	
+		<button class="butbk" id="bk4" onclick="changeBackGround(2)">BG2</button>	
+		<button class="butbk" id="bk5" onclick="changeBackGround(3)">BG3</button>	
+		<button class="butbk" id="bk6" onclick="changeBackGround(4)">BG4</button>	
+	</div>
+
+	<div  class="maind" id="maind" >
+
+
+
+		<div id="caldiv">
+			<div  class="linediv" id="bds" >
+				<p id="scre" >0.00</p>
+			</div>	
+			
+			<div  class="linediv" id="bd1" >
+				<button class="buttons" id="bn7" onclick="formArray('7','seven','siete')">7</button>
+
+				<button class="buttons" id="bn8" onclick="formArray('8','eight','ocho')">8</button>
+
+				<button class="buttons" id="bn9" onclick="formArray('9','nine','nueve')">9</button>
+
+				<button class="buttons" id="bna" onclick="formArray('+','plus','mas')">+</button>
+
+				<button class="buttons" id="bnDel" onclick="formArray('DEL','delete','borrar')">Del</button>
+
+				<button class="buttons" id="bnP1" onclick="formArray('(','open parenthesis','abre parenthesis')">(</button>
+			</div>	
+
+			<div  class="linediv" id="bd2" >
+				<button class="buttons" id="bn4" onclick="formArray('4','four','cuatro')">4</button>
+
+				<button class="buttons" id="bn5" onclick="formArray('5','five','cinco')">5</button>
+
+				<button class="buttons" id="bn6" onclick="formArray('6','six','seis')">6</button>
+
+				<button class="buttons" id="bns" onclick="formArray('-','minus','menos')">-</button>
+
+				<button class="buttons" id="bnSqr" onclick="formArray('SQRT','Square root is', 'raiz ')">Sqrt</button>
+
+				<button class="buttons" id="bnP2" onclick="formArray(')','close parenthesis','cierra parenthesis')">)</button>
+			</div>	
+
+			<div  class="linediv" id="bd3" >
+				<button class="buttons" id="bn1" onclick="formArray('1','one','uno')"   style="  ">1</button>
+
+				<button class="buttons" id="bn2" onclick="formArray('2','two','dos')">2</button>
+
+				<button class="buttons" id="bn3" onclick="formArray('3','three','tres')">3</button>
+
+				<button class="buttons" id="bnm" onclick="formArray('*','multiplied by','multipicado por')">*</button>
+
+				<button class="buttons" id="bnMem" onclick="formArray('MEM','memory','memoria')">MEM</button>
+
+				<button class="buttons" id="bnAvg" onclick="formArray('AVG','average','promedio')">AVG</button>
+			</div>	
+
+			<div  class="linediv" id="bd4" >
+				<button class="buttons" id="bn0" onclick="formArray('0','cero','cero')">0</button>
+
+				<button class="buttons" id="bnDot" onclick="formArray('.','period','punto')">.</button>
+
+				<button class="buttons" id="bnEqu" onclick="formArray('=','equal to','igual a')">=</button>
+
+				<button class="buttons" id="bnd" onclick="formArray('/','divided by ','dividido entre')">/</button>
+
+				<button class="buttons" id="bnClr" onclick="formArray('CLR','clear','limpiar')">Clr</button>	
+
+				<button class="buttons" id="bnPer" onclick="changeLanguage()">Lang</button>
+			</div>	
+
+		</div>
+		<h1  id="myh1">Kamely's Calculator</h1>
+
+	</div>	
+
+</body>
+
+<script type="text/javascript">
+
+	var myArray=[];
+	var memo=[];
+	var i=0;
+	var language="";
+	var audioSound = true;
+
+	window.addEventListener("keydown", checkKeyPressed, false);
+ 
+	function checkKeyPressed(e) {
+	    switch(e.keyCode){
+	     	case 8:
+	     		formArray('DEL','delete','borrar');
+	     		break;
+
+	     	case 16:
+	     		changeLanguage();
+	     		break;
+
+	     	case 13:
+	     		formArray('=','equal to', 'igual a');
+	     		break;
+
+	     	case 27:
+	     		formArray('CLR','clear','limpiar');
+	     		break;
+
+	     	case 42,186:
+	     		formArray('*','multiplied by','multiplicado por');
+	     		break;
+
+	     	case 43,187:
+	     		formArray('+','plus','mas');
+	     		break;
+
+	     	case 45,189:
+	     		formArray('-','minus','menos');
+	     		break;
+
+	     	case 46,190:
+	     		formArray('.','period','punto');
+	     		break;
+
+	     	case 47,191:
+	     		formArray('/','divided by','dividido entre');
+	     		break;
+
+	     	case 48:
+	     		formArray('0','cero','cero');
+	     		break;
+
+	     	case 49:
+	     		formArray('1','one','uno');
+	     		break;
+
+	     	case 50:
+	     		formArray('2','two','dos');
+	     		break;
+
+	     	case 51:
+	     		formArray('3','three','tres');
+	     		break;
+
+	     	case 52:
+	     		formArray('4','four','cuatro');
+	     		break;
+
+	     	case 53:
+	     		formArray('5','five','cinco');
+	     		break;
+
+	     	case 54:
+	     		formArray('6','six','seis');
+	     		break;
+
+	     	case 55:
+	     		formArray('7','seven','siete');
+	     		break;
+
+	     	case 56:
+	     		formArray('8','eight','ocho');
+	     		break;
+
+	     	case 57:
+	     		formArray('9','nine','nueve');
+	     		break;
+
+	     	case 219: 
+	     		formArray('(','open parenthesis','abre parenthesis ');
+	     		break;
+
+	     	case 220: 
+	     		formArray('MEM','memory','memoria');
+	     		break;
+
+	     	case 221: 
+	     		formArray(')','close parenthesis','cierra parenthesis');
+	     		break;
+
+	     	default:
+	     		break;
+
+	    }
+	}
+
+	function formArray(buttonPressed,mySound,mySoundSpa) {
+		
+		var k=0; // use it in  the for loop 
+		var operation=""; // string that contains that operation 
+		var strOp=""; // has the actual value of the screen
+		var clearArray=false; // boolean variable that tells me if I have to reset the array and the itirator
+		var resultado=0; // has the result of the operation
+		var getMemo=false;// tells me if I have to get the value in memory
+
+		strOp=document.getElementById("scre").innerHTML;
+		textToAudio(mySound,mySoundSpa);		
+
+		switch(buttonPressed){
+
+			case "CLR":
+				clearArray=true;
+				break;
+
+			case "DEL":
+				if (myArray.length>0){
+					myArray.pop();
+					i=i-1;
+				}
+				break;
+
+			case "AVG":
+				clearArray=true;
+				//operation=getAverage();
+				operation=getAverage2(strOp);
+			  	textToAudio(operation.toString() ,operation.toString());
+				break;
+
+			case "SQRT":
+				clearArray=true;
+				resultado = eval("Math.sqrt(Math.abs("+ strOp +"))")
+				operation=resultado;
+			  	textToAudio(resultado.toString() + " ",resultado.toString() + " ");
+				break;
+
+			case "=":
+				clearArray=true;
+				resultado = eval(strOp);
+				operation=resultado;
+			  	textToAudio(resultado.toString(),resultado.toString());
+				break;
+			
+			case "MEM":
+				myArray=memo;
+				i=memo.length;
+				getMemo=true;
+				break;
+
+			default:
+				myArray[i]=buttonPressed;
+				i=i+1;
+				memo=myArray;
+				break;
+
+		}
+			
+		
+		if(clearArray){
+
+			if (isNaN(operation) && operation.length>0){
+
+			} 
+
+
+			myArray=[];
+			i=0;
+		}
+
+		for(k=0;k<myArray.length;k=k+1){
+			operation +=  myArray[k].toString();
+		}
+
+		if (operation.length===0){
+			operation="0.00"
+		}
+
+		document.getElementById("scre").innerHTML=operation;
+	}
+
+
+	function getAverage(){
+		var k=0;	
+		var average=0.12;
+		var sum=0;
+		var strOperation="";
+
+		for(k=0;k<memo.length;k=k+1){
+			strOperation +=  memo[k].toString();
+		}
+		
+		//replece every operator by a common character
+		for(k=0;k<strOperation.length;k=k+1){
+			strOperation=(((strOperation.replace("+","_")).replace("-","_")).replace("/","_")).replace("*","_");
+
+		}
+		// use the common character to split the string and convert it to an array
+		strOperation=strOperation.split("_");
+
+		// use the array to get the avg
+		for (k=0;k<strOperation.length;k=k+1){
+			sum=sum+Number(strOperation[k]);
+		}
+
+		average=(sum/strOperation.length);
+		return average;
+
+	}
+
+	function getAverage2(myValue){
+
+		var k=0;	
+		var average=0.12;
+		var sum=0;
+		var strOperation="";
+
+		for(k=0;k<memo.length;k=k+1){
+			strOperation +=  memo[k].toString();
+		}
+		
+		//replece every operator by a common character
+		for(k=0;k<strOperation.length;k=k+1){
+			strOperation=(((strOperation.replace("+","_")).replace("-","_")).replace("/","_")).replace("*","_");
+
+		}
+		// use the common character to split the string and convert it to an array
+		strOperation=strOperation.split("_");
+
+		average=Number(myValue)/strOperation.length;
+		return average;
+	}
+
+	function textToAudio(myText,myTextSpa){
+		//if is spanish firts I have to translate	
+		if (audioSound){
+			if (language==='esp'){
+		  		responsiveVoice.speak(myTextSpa,"Spanish Female");
+		  	}
+		  	else
+		  	{
+		  		responsiveVoice.speak(myText,"US English Female");
+		  	}	
+		  }
+	}
+
+	function changeLanguage(){
+		
+		if (language==='esp'){
+	  		language='eng';
+	  		responsiveVoice.speak("language : English","US English Female");
+	  	}
+	  	else
+	  	{
+	  		responsiveVoice.speak("Idioma : Español","Spanish Female")
+	  		language='esp';
+	  	}	
+	}
+
+	function changeBackGround(imageNumber){
+	    document.getElementById("maind").style.animationDuration="0" ;
+	    document.getElementById("maind").style["background-size"]="cover" ;
+
+       	switch(imageNumber){
+       		case 2 :
+
+	            document.getElementById("maind").style.backgroundImage = "url(images/braille.jpg)";
+	            break
+
+       		case 3 :
+	            document.getElementById("maind").style.backgroundImage = "url(images/braille2.jpg)";
+	            break
+
+       		case 4 :
+	            document.getElementById("maind").style.backgroundImage = "url(images/braille3.jpg)";
+	            break
+
+       		default :
+	            document.getElementById("maind").style.backgroundColor =  " linear-gradient(132deg,#000066,#6666ff) ";
+       			document.getElementById("maind").style.backgroundImage =  " linear-gradient(132deg,#000066,#6666ff) ";
+	   	    	document.getElementById("maind").style.animationDuration="5s" ;
+	            break
+       	}
+
+    }	
+
+
+</script>
+</html>
